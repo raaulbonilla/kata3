@@ -1,0 +1,3 @@
+Personas: 10
+Mayores de edad: 9
+Menores de edad: 1
