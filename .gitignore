@@ -1,7 +1,11 @@
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+out/
+bin/
+*.class
+*.jar
+*.war
+*.zip
+*.exe
 .kotlin
 
 ### IntelliJ IDEA ###
@@ -29,11 +33,11 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
 
 ### Mac OS ###
 .DS_Store
+
+*.log
