@@ -1,19 +1,15 @@
 package software.ulpgc.katas;
 
 import com.google.gson.JsonIOException;
-import software.ulpgc.katas.io.PersonReader;
 import software.ulpgc.katas.io.TsvPersonReader;
 import software.ulpgc.katas.output.PersonJsonWriter;
-import software.ulpgc.katas.output.SummaryWriter;
 import software.ulpgc.katas.service.PersonReport;
-import software.ulpgc.katas.service.PersonSummary;
 
-import java.io.*;
-import java.net.URL;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.List;
 
 public class Main {
     static void main(String[] args) {

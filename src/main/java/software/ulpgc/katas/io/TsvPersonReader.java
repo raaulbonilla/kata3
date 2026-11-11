@@ -4,7 +4,6 @@ import software.ulpgc.katas.Person;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
