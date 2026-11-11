@@ -2,38 +2,37 @@ package software.ulpgc.katas;
 
 import software.ulpgc.katas.io.PersonReader;
 import software.ulpgc.katas.io.TsvPersonReader;
+import software.ulpgc.katas.output.PersonJsonWriter;
 import software.ulpgc.katas.output.SummaryWriter;
+import software.ulpgc.katas.service.PersonReport;
 import software.ulpgc.katas.service.PersonSummary;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
-    private static final String DATA_URL = "https://raw.githubusercontent.com/clue/reactphp-tsv/main/examples/users.tsv";
-
-    static void main(String[] args) throws IOException {
-        try {
-            InputStream input = new URL(DATA_URL).openStream();
-            OutputStream output = System.out;
-            run(input, output);
-        } catch (IOException | IllegalArgumentException e) {
-            System.err.println("Error al leer de Internet: " + e.getMessage());
-        }
-        try {
-            InputStream input = new FileInputStream("people.tsv");
-            OutputStream output = new FileOutputStream("summary.txt");
-            run(input, output);
-        } catch (IOException | IllegalArgumentException e) {
-            System.err.println("Error al leer del fichero: " + e.getMessage());
+    static void main(String[] args) {
+        Path source = Path.of(args.length == 0 ? "people.tsv" : args[0]);
+        boolean memory = args.length > 1 && args[1].equals("--memory");
+        Path target = Path.of(memory ? "report-memory.json" : "report.json");
+        try (InputStream input = memory
+                ? new ByteArrayInputStream(Files.readAllBytes(source))
+                : Files.newInputStream(source)) {
+            run(input, target);
+            System.out.println("Generado " + target);
+        } catch (IOException | IllegalArgumentException | JsonIOException e) {
+            System.err.println("Error al generar el JSON: " + e.getMessage());
         }
     }
-
-    private static void run(InputStream input, OutputStream output) throws IOException {
-        PersonReader reader = new TsvPersonReader();
-        List<Person> persons = reader.readAll(input);
-        String summary = new PersonSummary().summarize(persons);
-        new SummaryWriter().write(summary, output);
+    private static void run(InputStream input, Path target) throws IOException {
+        var result = new TsvPersonReader().readAll(input);
+        var report = PersonReport.from(result);
+        try (var output = Files.newOutputStream(target)) {
+            new PersonJsonWriter().write(report, output);
+        }
     }
 }
