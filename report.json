@@ -1,0 +1,44 @@
+{
+  "people": [
+    {
+      "name": "first",
+      "birthday": "2017-01-01"
+    },
+    {
+      "name": "second",
+      "birthday": "2006-01-01"
+    },
+    {
+      "name": "third",
+      "birthday": "1995-01-01"
+    },
+    {
+      "name": "fifth",
+      "birthday": "1973-01-01"
+    },
+    {
+      "name": "sixth",
+      "birthday": "1962-01-01"
+    },
+    {
+      "name": "seventh",
+      "birthday": "1951-01-01"
+    },
+    {
+      "name": "eighth",
+      "birthday": "1940-01-01"
+    },
+    {
+      "name": "ninth",
+      "birthday": "1939-01-01"
+    },
+    {
+      "name": "tenth",
+      "birthday": "1928-01-01"
+    }
+  ],
+  "summary": {
+    "valid": 9,
+    "discarded": 1
+  }
+}
