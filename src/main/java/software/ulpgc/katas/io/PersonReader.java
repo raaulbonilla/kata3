@@ -7,5 +7,5 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface PersonReader {
-    List<Person> readAll(InputStream input) throws IOException;
+    PersonReadResult readAll(InputStream input) throws IOException;
 }
