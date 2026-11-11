@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TsvPersonReader implements PersonReader {
+    private final PersonTsvParser parser = new PersonTsvParser();
+
     @Override
     public List<Person> readAll(InputStream input) throws IOException {
         Reader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
@@ -33,23 +35,11 @@ public class TsvPersonReader implements PersonReader {
         List<Person> persons = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             try {
-                persons.add(loadFrom(lines.get(i)));
+                persons.add(parser.parse(lines.get(i)));
             } catch (Exception e) {
                 throw new IllegalArgumentException("Fila " + (i+1) + " incorrecta", e);
             }
         }
         return persons;
-    }
-
-    private Person loadFrom(String line) {
-        String[] fields = line.split("\t", -1);
-        return loadFrom(fields);
-    }
-
-    private static Person loadFrom(String[] fields) {
-        if (fields.length < 2 || fields[0].isBlank() || fields[1].isBlank()) {
-            throw new IllegalArgumentException("Falta el nombre o la fecha");
-        }
-        return new Person(fields[0], LocalDate.parse(fields[1]));
     }
 }
