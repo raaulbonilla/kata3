@@ -15,7 +15,7 @@ Para compilar, ejecuta `mvn compile`. Para ejecutar el proyecto, abre el `pom.xm
 
 ## Vídeo
 
-[Ver vídeo de la Kata 3 en YouTube](https://youtu.be/nfG7Gw9E-zo) · 6:42 min.
+[Ver vídeo de la Kata 3 en YouTube](https://youtu.be/nfG7Gw9E-zo)
 
 ## Práctica y verificación
 
